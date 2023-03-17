@@ -1,0 +1,52 @@
+import os
+from tkinter import *
+from tkinter import filedialog
+from pygame import mixer
+
+# Initialize the mixer
+mixer.init()
+
+# Create the app window
+app = Tk()
+app.title("Music Player")
+app.geometry("500x350")
+
+# Add a label to display the current song playing
+song_label = Label(app, text="", font=("bold", 14))
+song_label.pack(pady=10)
+
+# Add a listbox to display the playlist
+playlist_box = Listbox(app, bg="white", fg="black", width=60, selectbackground="gray", selectforeground="white")
+playlist_box.pack(pady=20)
+
+# Define functions for the app buttons
+def add_song():
+    song = filedialog.askopenfilename(initialdir="C:/", title="Select a Song", filetypes=(("mp3 files", "*.mp3"),))
+    playlist_box.insert(END, os.path.basename(song))
+    playlist.append(song)
+
+def play_song():
+    song = playlist_box.get(ACTIVE)
+    song_label.config(text=song)
+    mixer.music.load(song)
+    mixer.music.play()
+
+def stop_song():
+    mixer.music.stop()
+    song_label.config(text="")
+
+# Add the app buttons
+add_button = Button(app, text="Add Song", width=10, command=add_song)
+add_button.pack(side=LEFT, padx=20)
+
+play_button = Button(app, text="Play Song", width=10, command=play_song)
+play_button.pack(side=LEFT)
+
+stop_button = Button(app, text="Stop Song", width=10, command=stop_song)
+stop_button.pack(side=LEFT, padx=20)
+
+# Create the playlist variable
+playlist = []
+
+# Run the app
+app.mainloop()
