@@ -5,7 +5,7 @@ from tkinter import filedialog
 import os
 
 root = Tk()     
-root.title("MusicPlayer")
+root.title("Substantially LRG MusicPlayer")
 root.geometry("1000x400")
 # Initiating Pygame
 pygame.init()
